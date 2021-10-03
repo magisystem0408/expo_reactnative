@@ -15,7 +15,7 @@ const styles =StyleSheet.create({
     }
 })
 
-const Layout = () => {
+const LayoutTest = () => {
     return (
         <SafeAreaView style ={styles.container}>
             <View style={[styles.box,{backgroundColor:"red"}]} />
@@ -26,4 +26,4 @@ const Layout = () => {
     );
 };
 
-export default Layout;
+export default LayoutTest;
