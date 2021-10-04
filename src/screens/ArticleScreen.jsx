@@ -1,6 +1,9 @@
 import React from "react";
-import {StyleSheet, SafeAreaView, Text} from "react-native";
+import {StyleSheet, TouchableOpacity, SafeAreaView, Text} from "react-native";
 import {WebView} from "react-native-webview"
+import {addClip, deleteClip} from "../../store/actions/user";
+import {useDispatch, useSelector} from "react-redux";
+import ClipButton from "../components/ClipButton";
 
 const styles = StyleSheet.create({
     container: {
@@ -9,11 +12,34 @@ const styles = StyleSheet.create({
     }
 })
 
+// dispatchのなかにアクションを書く
+const ArticleScreen = ({route}) => {
+    const dispatch = useDispatch()
 
-const ArticleScreen = () => {
-    return(
+    // storeのクリップ情報と比較してクリップされているかどうかを判断する
+    const user = useSelector(state => state.user);
+    const {clips} = user;
+
+    //クリップされているか否かを判定する
+        // 配列のなかにある要素があるかを見るときはsomeを使用する
+    const isClipped = () => {
+        return clips.some(clip => clip.url === article.url)
+    }
+
+    const toggleClip = () => {
+        if (isClipped()) {
+            dispatch(deleteClip({clip: article}))
+        } else {
+            dispatch(addClip({clip: article}))
+        }
+    }
+
+    // articleを引数受け取り
+    const {article} = route.params
+    return (
         <SafeAreaView style={styles.container}>
-           <WebView source={{uri:"https://www.yahoo.co.jp"}}/>
+            <ClipButton onPress={toggleClip} enabled={isClipped()}/>
+            <WebView source={{uri: article.url}}/>
         </SafeAreaView>
     )
 }

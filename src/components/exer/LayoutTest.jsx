@@ -1,6 +1,8 @@
 import React from 'react';
 import {SafeAreaView,View,StyleSheet} from "react-native";
 
+//配置についての練習
+
 const styles =StyleSheet.create({
     //alineItemsはflexDirectionの垂直方向に対して調整する
     container:{

@@ -1,11 +1,10 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from "react-native";
+import {Image, StyleSheet, Text, View, TouchableOpacity} from "react-native";
 
 
 // キャメルケースで書く
 //flex:1で描画可能なエリアを目一杯使用するという意味になる
 const styles = StyleSheet.create({
-
     itemContainer: {
         height: 100,
         width: "100%",
@@ -35,9 +34,9 @@ const styles = StyleSheet.create({
 
 });
 
-const ListItem = ({imageUrl, title, auther}) => {
+const ListItem = ({imageUrl, title, auther, onPress}) => {
     return (
-        <View style={styles.itemContainer}>
+        <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
             <View style={styles.leftContainer}>
                 {!!imageUrl && (<Image
                     style={{width: 100, height: 100}}
@@ -52,7 +51,7 @@ const ListItem = ({imageUrl, title, auther}) => {
                 </Text>
                 <Text style={styles.subText}>{auther}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 
