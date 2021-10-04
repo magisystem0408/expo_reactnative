@@ -2,6 +2,7 @@ import _ from "lodash";
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, FlatList, SafeAreaView} from 'react-native';
 import ListItem from "../components/ListItem";
+import Loading from "../components/Loading";
 import Constants from "expo-constants";
 import axios from "axios";
 
@@ -46,13 +47,16 @@ const styles = StyleSheet.create({
 
 const HomeScreen = ({navigation}) => {
     const [aritcles, setArticles] = useState([])
+    const [loading, setLoading] = useState(false)
     const fetchAriticles = async () => {
+        setLoading(true)
         try {
             const response = await axios.get(URL)
             setArticles(response.data.articles)
         } catch (error) {
             console.log(error)
         }
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -67,12 +71,13 @@ const HomeScreen = ({navigation}) => {
                           <ListItem imageUrl={item.urlToImage}
                                     title={item.title}
                                     auther={item.author}
-                                    onPress={() => navigation.navigate('Article',{
-                                        article:item
+                                    onPress={() => navigation.navigate('Article', {
+                                        article: item
                                     })}
                           />)
                       }
             />
+            {loading && <Loading/>}
         </SafeAreaView>
     );
 }

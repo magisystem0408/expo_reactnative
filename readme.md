@@ -1,3 +1,10 @@
+## プロジェクト開始
+
+```shell
+expo init my-app
+```
+
+
 ## ビルドコマンド
 ```shell
 expo build ios
@@ -43,3 +50,7 @@ expo publish --release-channel production
 - スプラッシュアイコン
   - サイズ
     - 1242 * 2436 px
+
+
+- reduxのstateをローカルストレージに保存してくれる
+  - https://www.npmjs.com/package/redux-persist
